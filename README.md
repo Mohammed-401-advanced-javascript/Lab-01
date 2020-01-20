@@ -42,7 +42,3 @@ Link to an image of the UML for your application and response to events
 
 
 
-
-
-
-##### The link to my Pull rquest is ---> https://github.com/Mohammed-401-advanced-javascript/Lab-01/pull/1

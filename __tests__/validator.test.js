@@ -6,66 +6,79 @@ describe('validator module performs basic validation of', () => {
 
   // TODO: Make this series of tests less repetitive ... DRY it out
 
+  let str = 'yes';
+  let num = 1;
+  let arr = ['a'];
+  let obj = {x:'y'};
+  let func = () => {};
+  let bool = false;
+  let array = [str, num, arr, obj, func, bool]
   it('strings', () => {
-    let str = 'yes';
-    let num = 1;
-    let arr = ['a'];
-    let obj = {x:'y'};
-    let func = () => {};
-    let bool = false;
-    expect(validator.isString(str)).toBeTruthy();
-    expect(validator.isString(num)).toBeFalsy();
-    expect(validator.isString(arr)).toBeFalsy();
-    expect(validator.isString(obj)).toBeFalsy();
-    expect(validator.isString(func)).toBeFalsy();
-    expect(validator.isString(bool)).toBeFalsy();
+   array.forEach(item=>{
+     if(validator.isString(item)){
+    expect(validator.isString(item)).toBeTruthy();
+      }else{expect(validator.isString(item)).toBeFalsy()};
+   }) 
+    // expect(validator.isString(arr)).toBeFalsy();
+    // expect(validator.isString(obj)).toBeFalsy();
+    // expect(validator.isString(func)).toBeFalsy();
+    // expect(validator.isString(bool)).toBeFalsy();
   });
 
   it('numbers', () => {
-    expect(true).toBeTruthy();
+    expect(validator.isNumber).toBeTruthy();
   });
 
   it('arrays', () => {
-    expect(true).toBeTruthy();
+    expect(validator.isArr).toBeTruthy();
   });
 
   it('objects', () => {
-    expect(true).toBeTruthy();
+    expect(validator.isObj).toBeTruthy();
   });
 
   it('booleans', () => {
-    expect(true).toBeTruthy();
+    expect(validator.isBoolean).toBeTruthy();
   });
 
   it('functions', () => {
-    expect(true).toBeTruthy();
+    expect(validator.isFunc).toBeTruthy();
   });
 
 });
 
-describe('validator module performs complex validations', () => {
+describe('validator that generate some validations to check what we made in our validator.js', () => {
+   let person ={
+     name:  'Mohammed',
+     age: 26,
+     country: 'Jordan',
+     love: false,
+     hoppies: ['Playing Video Games', 'driving', 'swiming']
+   }
 
   it('validates the presence of required object properties at any level', () => {
     // i.e. does person.hair.color exist and have a good value, not just person.hair
-    expect(true).toBeTruthy();
+    expect(person.love).toBeFalsy();
   });
 
   it('validates the proper types of object properties', () => {
     // i.e. person.name must be a string, etc.
-    expect(true).toBeTruthy();
+    expect(typeof(person.name)).toStrictEqual('string');
+    expect(person.name).toStrictEqual('Mohammed');
   });
 
   it('validates the types of values contained in an array', () => {
     // i.e. an array of all strings or numbers
-    expect(true).toBeTruthy();
+    expect(person.hoppies).toStrictEqual(['Playing Video Games', 'driving', 'swiming']);
   });
 
   it('validates a value array against an approved list', () => {
     // i.e. a string might only be allowed to be "yes" or "no"
-    expect(true).toBeTruthy();
+    expect(person.love).toBeFalsy();
   });
 
   // TODO: Cover so, so many more cases
-
+  it('validates if the age property does have a number',()=>{
+    expect(person.age).toBe(26);
+  })
 });
-
